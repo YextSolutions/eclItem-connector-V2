@@ -9,7 +9,7 @@
         "source": "yextAccount",
         "operation": "fetchMenuItems",
         "inputs": {
-          "apiKey": "${{km/connector.eclItem_connector.apiKey}}",
+          "apiKey": "${{apiKey}}",
           "environment": "api",
           "vParam": "20230322"
         }
