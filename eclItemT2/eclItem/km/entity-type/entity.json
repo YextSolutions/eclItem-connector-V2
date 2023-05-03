@@ -1,7 +1,0 @@
-{
-  "$id": "eclItem_entity",
-  "$schema": "https://schema.yext.com/config/km/entity-type/v2",
-  "description": "Custom Entity Type for Menu Item Entities.",
-  "displayName": "Menu Item",
-  "pluralDisplayName": ""
-}
