@@ -15,7 +15,7 @@ export async function getMenuArray(menuItemName) {
   // While there are still menus left to retrieve, continue making API calls
   while (offset < totalMenusCount) {
 
-    let apiUrl = 'https://api.yextapis.com/v2/accounts/me/menus?v=20230324&api_key=6de480af557d3649a27b4ce187346023&limit=50&offset=' + offset; //do we need to use +offset instead? The expression 
+    let apiUrl = 'https://api.yextapis.com/v2/accounts/me/menus?v=20230324&api_key=${apiKey}&limit=50&offset=' + offset; //do we need to use +offset instead? The expression 
 
     let response = await fetch(apiUrl);
     let jsonResponse = await response.json();
