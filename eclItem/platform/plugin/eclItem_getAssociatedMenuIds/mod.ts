@@ -19,6 +19,9 @@ export async function getMenuIdArray(menuItemName) {
      // Retrieve total count of menus returned by API
     totalMenusCount = jsonResponse.response.count;
     // Loop through menus returned by API response
+    if(typeof jsonResponse.response.menus == 'undefined') {return;}
+
+    else{
     for (let menu of jsonResponse.response.menus) {
       for (let section of menu.sections) {
         for (let item of section.items) {
@@ -29,8 +32,9 @@ export async function getMenuIdArray(menuItemName) {
       // If more than one item with matching name is found, add them to menuArray array with associated menu name
     }
   }
+  }
     // Update offset and API endpoint URL for next API call
-    offset = offset + 10; //
+    offset = offset + 50; //
     // Make API call to retrieve next page of results and convert response to JSON format
   }
   var uniqueMenuArray = [...new Set(menuArray)]; // removes duplicates
