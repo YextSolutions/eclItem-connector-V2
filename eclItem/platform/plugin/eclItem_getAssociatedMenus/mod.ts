@@ -15,13 +15,15 @@ export async function getMenuArray(menuItemName) {
   // While there are still menus left to retrieve, continue making API calls
   while (offset < totalMenusCount) {
 
-    let apiUrl = 'https://api.yextapis.com/v2/accounts/me/menus?v=20230324&api_key=${apiKey}&limit=50&offset=' + offset; //do we need to use +offset instead? The expression 
+    let apiUrl = 'https://api.yextapis.com/v2/accounts/me/menus?v=20230324&api_key=${apiKey}&limit=50&offset=' + offset; //
 
     let response = await fetch(apiUrl);
     let jsonResponse = await response.json();
      // Retrieve total count of menus returned by API
     totalMenusCount = jsonResponse.response.count;
+    if(typeof jsonResponse.response.menus == 'undefined') {return;}
     // Loop through menus returned by API response
+    else {
     for (let menu of jsonResponse.response.menus) {
       for (let section of menu.sections) {
         for (let item of section.items) {
@@ -32,8 +34,9 @@ export async function getMenuArray(menuItemName) {
       // If more than one item with matching name is found, add them to menuArray array with associated menu id
     }
   }
+  }
     // Update offset and API endpoint URL for next API call
-    offset = offset + 10; 
+    offset = offset + 50; 
   }
   var uniqueMenuArray = [...new Set(menuArray)]; // removes duplicates
   return uniqueMenuArray.toString()
