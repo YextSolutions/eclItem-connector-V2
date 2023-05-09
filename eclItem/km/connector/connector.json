@@ -131,8 +131,8 @@
             "Associated Menus"
           ]
         },
-        "plugin": "eclItem_getAssociatedMenuIds",
-        "function": "getMenuIdArray"
+        "plugin": "eclItem_getAssociatedMenus",
+        "function": "getMenuArray"
       }
     }
   ],
@@ -159,7 +159,7 @@
     },
     {
       "header": "Associated Menus",
-      "field": "eclItem_associatedMenusID",
+      "field": "eclItem_associatedMenus",
       "subfieldPath": [],
       "clearValueIfBlank": false
     },
