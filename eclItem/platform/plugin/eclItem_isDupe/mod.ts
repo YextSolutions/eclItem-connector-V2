@@ -38,9 +38,9 @@ export async function isDupe(idAndName) {
       }
     }
 
-    offset = offset + 10
+    offset = offset + 50
     count = jsonResponse.response.count
-   }
+  }
   }
 
     if (finalCounter > 1) {
