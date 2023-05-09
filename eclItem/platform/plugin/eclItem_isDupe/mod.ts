@@ -20,7 +20,7 @@ export async function isDupe(idAndName) {
 
   while (offset < count) {
 
-    const response = await fetch('https://api.yextapis.com/v2/accounts/me/menus?v=20230324&api_key=${apiKey}&limit=50&offset=' + offset);  
+    const response = await fetch('https://api.yextapis.com/v2/accounts/me/menus?v=20230324&api_key=${{apiKey}}&limit=50&offset=' + offset);  
     const jsonResponse = await response.json();
     if(typeof jsonResponse.response.menus == 'undefined') {return;}
 
