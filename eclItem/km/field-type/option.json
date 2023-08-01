@@ -1,36 +1,36 @@
 {
-  "$id": "eclItem_option",
-  "$schema": "https://schema.yext.com/config/km/field-type/v1",
-  "description": "",
-  "displayName": "Menu Item - Option",
-  "type": {
-    "structType": {
-      "property": [
-        {
-          "name": "eclItem_optionName",
-          "displayName": "Option Name",
-          "isRequired": false,
-          "typeId": "string",
-          "type": {
-            "stringType": {
-              "stereotype": "SIMPLE",
-              "maxLength": 100000
-            }
-          }
-        },
-        {
-          "name": "eclItem_optionPriceValue",
-          "displayName": "Option Price (Value)",
-          "isRequired": false,
-          "typeId": "string",
-          "type": {
-            "stringType": {
-              "stereotype": "SIMPLE",
-              "maxLength": 100000
-            }
-          }
+    "$id": "eclItem_option",
+    "$schema": "https://schema.yext.com/config/km/field-type/v1",
+    "description": "",
+    "displayName": "Menu Item - Option",
+    "type": {
+        "structType": {
+            "property": [
+                {
+                    "name": "eclItem_optionName",
+                    "displayName": "Option Name",
+                    "isRequired": false,
+                    "typeId": "string",
+                    "type": {
+                        "stringType": {
+                            "stereotype": "SIMPLE",
+                            "maxLength": 100000
+                        }
+                    }
+                },
+                {
+                    "name": "eclItem_optionPriceValue",
+                    "displayName": "Option Price (Value)",
+                    "isRequired": false,
+                    "typeId": "string",
+                    "type": {
+                        "stringType": {
+                            "stereotype": "SIMPLE",
+                            "maxLength": 100000
+                        }
+                    }
+                }
+            ]
         }
-      ]
     }
-  }
 }

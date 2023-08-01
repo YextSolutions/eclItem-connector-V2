@@ -1,200 +1,206 @@
 {
-  "$id": "eclItem_connector",
-  "$schema": "https://schema.yext.com/config/km/connector/v3",
-  "displayName": "Menu Item Connector",
-  "entityType": "eclItem_entity",
-  "source": {
-    "sourceConfig": {
-      "nativeSourceConfig": {
-        "source": "yextAccount",
-        "operation": "fetchMenuItems",
-        "inputs": {
-          "apiKey": "${{apiKey}}",
-          "environment": "api",
-          "vParam": "20230322"
-        }
-      }
-    },
-    "selectors": [
-      {
-        "type": "JSON",
-        "header": "cost.type",
-        "path": "cost.type"
-      },
-      {
-        "type": "JSON",
-        "header": "cost.price",
-        "path": "cost.price"
-      },
-      {
-        "type": "JSON",
-        "header": "cost.options[].name",
-        "path": "cost.options[].name"
-      },
-      {
-        "type": "JSON",
-        "header": "cost.options[].price",
-        "path": "cost.options[].price"
-      },
-      {
-        "type": "JSON",
-        "header": "photo.url",
-        "path": "photo.url"
-      },
-      {
-        "type": "JSON",
-        "header": "photo.height",
-        "path": "photo.height"
-      },
-      {
-        "type": "JSON",
-        "header": "photo.width",
-        "path": "photo.width"
-      },
-      {
-        "type": "JSON",
-        "header": "id",
-        "path": "id"
-      },
-      {
-        "type": "JSON",
-        "header": "name",
-        "path": "name"
-      },
-      {
-        "type": "JSON",
-        "header": "description",
-        "path": "description"
-      },
-      {
-        "type": "JSON",
-        "header": "calories.type",
-        "path": "calories.type"
-      },
-      {
-        "type": "JSON",
-        "header": "calories.calorie",
-        "path": "calories.calorie"
-      },
-      {
-        "type": "JSON",
-        "header": "Associated Menus",
-        "path": "name"
-      }
-    ]
-  },
-  "transforms": [
-    {
-      "addColumn": {
-        "newColumnHeader": "Item Price (Currency)",
-        "columnValue": "USD"
-      }
-    },
-    {
-      "mergeColumns": {
-        "inputHeaders": [
-          "id",
-          "name"
-        ],
-        "newColumnHeader": "Duplicate Check",
-        "delimiter": ","
-      }
-    },
-    {
-      "function": {
-        "inputHeaders": {
-          "headers": [
-            "Duplicate Check"
-          ]
+    "$id": "eclItem_connector",
+    "$schema": "https://schema.yext.com/config/km/connector/v4",
+    "displayName": "Menu Item Connector",
+    "entityTypes": [
+        "eclItem_entity"
+    ],
+    "source": {
+        "sourceConfig": {
+            "nativeSourceConfig": {
+                "source": "yextAccount",
+                "operation": "fetchMenuItems",
+                "inputs": {
+                    "apiKey": "${{apiKey}}",
+                    "environment": "api",
+                    "vParam": "20230322"
+                }
+            }
         },
-        "plugin": "eclItem_isDupe",
-        "function": "isDupe"
-      }
-    },
-    {
-      "filterRows": {
-        "action": "REMOVE",
-        "combinator": "AND",
-        "rules": [
-          {
-            "columnHeader": "Duplicate Check",
-            "conditional": "EQUALS",
-            "conditionalInput": "DUPE"
-          }
+        "selectors": [
+            {
+                "type": "JSON",
+                "header": "cost.type",
+                "path": "cost.type"
+            },
+            {
+                "type": "JSON",
+                "header": "cost.price",
+                "path": "cost.price"
+            },
+            {
+                "type": "JSON",
+                "header": "cost.options[].name",
+                "path": "cost.options[].name"
+            },
+            {
+                "type": "JSON",
+                "header": "cost.options[].price",
+                "path": "cost.options[].price"
+            },
+            {
+                "type": "JSON",
+                "header": "photo.url",
+                "path": "photo.url"
+            },
+            {
+                "type": "JSON",
+                "header": "photo.height",
+                "path": "photo.height"
+            },
+            {
+                "type": "JSON",
+                "header": "photo.width",
+                "path": "photo.width"
+            },
+            {
+                "type": "JSON",
+                "header": "id",
+                "path": "id"
+            },
+            {
+                "type": "JSON",
+                "header": "name",
+                "path": "name"
+            },
+            {
+                "type": "JSON",
+                "header": "description",
+                "path": "description"
+            },
+            {
+                "type": "JSON",
+                "header": "calories.type",
+                "path": "calories.type"
+            },
+            {
+                "type": "JSON",
+                "header": "calories.calorie",
+                "path": "calories.calorie"
+            },
+            {
+                "type": "JSON",
+                "header": "Associated Menus",
+                "path": "name"
+            }
         ]
-      }
     },
-    {
-      "function": {
-        "inputHeaders": {
-          "headers": [
-            "Associated Menus"
-          ]
+    "transforms": [
+        {
+            "addColumn": {
+                "newColumnHeader": "Item Price (Currency)",
+                "columnValue": "USD"
+            }
         },
-        "plugin": "eclItem_getAssociatedMenus",
-        "function": "getMenuArray"
-      }
-    }
-  ],
-  "mappings": [
-    {
-      "header": "photo.url",
-      "field": "eclItem_photo",
-      "subfieldPath": [
         {
-          "name": "url"
-        }
-      ],
-      "clearValueIfBlank": false
-    },
-    {
-      "header": "cost.options[].name",
-      "field": "eclItem_option",
-      "subfieldPath": [
+            "mergeColumns": {
+                "inputHeaders": [
+                    "id",
+                    "name"
+                ],
+                "newColumnHeader": "Duplicate Check",
+                "delimiter": ","
+            }
+        },
         {
-          "name": "eclItem_optionName"
+            "function": {
+                "inputHeaders": {
+                    "headers": [
+                        "Duplicate Check"
+                    ]
+                },
+                "plugin": "eclItem_isDupe",
+                "function": "isDupe"
+            }
+        },
+        {
+            "filterRows": {
+                "action": "REMOVE",
+                "combinator": "AND",
+                "rules": [
+                    {
+                        "columnHeader": "Duplicate Check",
+                        "conditional": "EQUALS",
+                        "conditionalInput": "DUPE"
+                    }
+                ]
+            }
+        },
+        {
+            "function": {
+                "inputHeaders": {
+                    "headers": [
+                        "Associated Menus"
+                    ]
+                },
+                "plugin": "eclItem_getAssociatedMenus",
+                "function": "getMenuArray"
+            }
         }
-      ],
-      "clearValueIfBlank": false
+    ],
+    "mappings": [
+        {
+            "header": "photo.url",
+            "field": "eclItem_photo",
+            "subfieldPath": [
+                {
+                    "name": "url"
+                }
+            ],
+            "clearValueIfBlank": false
+        },
+        {
+            "header": "cost.options[].name",
+            "field": "eclItem_option",
+            "subfieldPath": [
+                {
+                    "name": "eclItem_optionName"
+                }
+            ],
+            "clearValueIfBlank": false
+        },
+        {
+            "header": "Associated Menus",
+            "field": "eclItem_associatedMenus",
+            "subfieldPath": [],
+            "clearValueIfBlank": false
+        },
+        {
+            "header": "name",
+            "field": "name",
+            "subfieldPath": [],
+            "clearValueIfBlank": false
+        },
+        {
+            "header": "description",
+            "field": "eclItem_description",
+            "subfieldPath": [],
+            "clearValueIfBlank": false
+        },
+        {
+            "header": "id",
+            "field": "entityId",
+            "subfieldPath": [],
+            "clearValueIfBlank": false
+        },
+        {
+            "header": "calories.calorie",
+            "field": "eclItem_calories",
+            "subfieldPath": [],
+            "clearValueIfBlank": false
+        }
+    ],
+    "scheduleConfig": {
+        "customSchedule": {
+            "timeZone": "Pacific/Easter",
+            "startDate": "2023-03-30",
+            "startTime": "00:00",
+            "frequencyType": "MONTHLY"
+        },
+        "runMode": "COMPREHENSIVE"
     },
-    {
-      "header": "Associated Menus",
-      "field": "eclItem_associatedMenus",
-      "subfieldPath": [],
-      "clearValueIfBlank": false
-    },
-    {
-      "header": "name",
-      "field": "name",
-      "subfieldPath": [],
-      "clearValueIfBlank": false
-    },
-    {
-      "header": "description",
-      "field": "eclItem_description",
-      "subfieldPath": [],
-      "clearValueIfBlank": false
-    },
-    {
-      "header": "id",
-      "field": "entityId",
-      "subfieldPath": [],
-      "clearValueIfBlank": false
-    },
-    {
-      "header": "calories.calorie",
-      "field": "eclItem_calories",
-      "subfieldPath": [],
-      "clearValueIfBlank": false
+    "comprehensiveModeConfig": {
+        "comprehensiveSet": "ENTITIES_CREATED_BY_THIS_CONNECTOR",
+        "actionOnMissingEntities": "DELETE"
     }
-  ],
-  "scheduleConfig": {
-    "customSchedule": {
-      "timeZone": "Pacific/Easter",
-      "startDate": "2023-03-30",
-      "startTime": "00:00",
-      "frequencyType": "MONTHLY"
-    },
-    "runMode": "COMPREHENSIVE"
-  }
 }
